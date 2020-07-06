@@ -74,7 +74,7 @@ public class Application
      * in: AcCoMmOdatIOn
      * out: 4
      *
-     * AcCoMmOdatIOn -> have (a:2, c:2, o:3, m:2, d:1, t:1, i:1, n1)
+     * AcCoMmOdatIOn -> have (a:2, c:2, o:3, m:2, d:1, t:1, i:1, n:1)
      *               -> just more than one (a:2, c:2, o:3, m:2)
      *               -> sum them             ^    ^    ^    ^  -> 4
      *
@@ -175,8 +175,8 @@ public class Application
      * in: 2147483467L -> out : 127.255.255.75
      *
      * how ?
-     * 1.- Convert a long in binary (always will get you a 32 bits or less)
-     * 2.- Get one byte (this requires 8 bits of the 32 available)
+     * 1.- Convert a long in binary (you will always get 32 bits or less, if there is less just apply the pad to the left with zero)
+     * 2.- Get 4 bytes (4 groups of 8 bits will give you 4 bytes)
      * 3.- Converts each byte to a decimal number
      * 4.- Apply the ip format to your 4 decimal numbers
      *
@@ -194,10 +194,10 @@ public class Application
      *
      * Example
      * in : "When I was young I had a lot of toys" -> out : 1
-     * ^           ^     ^              -> can be any of them
+     *            ^           ^     ^              -> can be any of them
      *
      * in : "The worst part of school was solving problems like this" -> out : 2
-     * ^
+     *                      ^^
      *
      * @param s a text to find the shortest word
      * @return a shortest word size in a text
@@ -214,6 +214,7 @@ public class Application
      * Example
      * in : {1,2,3,8,5,2} -> out : 2
      * in : {5,9,6,7,5,9,9} -> out : 5
+     * in : {5,1,6,7,8,9,9} -> out : 9
      *
      * @param values is an int array
      * @return a first number repeated in the array or else return -1
